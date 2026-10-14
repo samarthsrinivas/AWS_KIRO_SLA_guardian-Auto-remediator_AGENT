@@ -1,0 +1,6 @@
+{
+  "service": "sla-demo-svc",
+  "alias": "live",
+  "known_good_versions": ["1"],
+  "sla_max_error_rate": 0.05
+}

@@ -1,0 +1,49 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvokeClaudeSonnet46ViaUSInferenceProfile",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:us-east-1:463332366725:inference-profile/us.anthropic.claude-sonnet-4-6",
+        "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-sonnet-4-6",
+        "arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-sonnet-4-6",
+        "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-sonnet-4-6"
+      ]
+    },
+    {
+      "Sid": "ApplySLAGuardianGuardrail",
+      "Effect": "Allow",
+      "Action": "bedrock:ApplyGuardrail",
+      "Resource": "arn:aws:bedrock:us-east-1:463332366725:guardrail/sls107g72e26"
+    },
+    {
+      "Sid": "ReadDemoServiceLogsOnly",
+      "Effect": "Allow",
+      "Action": "logs:FilterLogEvents",
+      "Resource": "arn:aws:logs:us-east-1:463332366725:log-group:/aws/lambda/sla-demo-svc:*"
+    },
+    {
+      "Sid": "RollbackLiveAliasOnly",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:GetAlias",
+        "lambda:UpdateAlias"
+      ],
+      "Resource": [
+        "arn:aws:lambda:us-east-1:463332366725:function:sla-demo-svc",
+        "arn:aws:lambda:us-east-1:463332366725:function:sla-demo-svc:live"
+      ]
+    },
+    {
+      "Sid": "WriteIncidentReportsOnly",
+      "Effect": "Allow",
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::sla-guardian-incidents-463332366725-us-east-1/incidents/*"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# Pinned — this dependency set is tested together. Upgrade deliberately,
+# not casually: version drift between these packages breaks the agent.
+strands-agents==1.56.0
+strands-agents-tools==0.8.9
+bedrock-agentcore==1.23.1
+boto3==1.43.98

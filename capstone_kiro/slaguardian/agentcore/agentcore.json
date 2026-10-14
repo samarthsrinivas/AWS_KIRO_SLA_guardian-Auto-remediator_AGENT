@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schema.agentcore.aws.dev/v1/agentcore.json",
+  "name": "slaguardian",
+  "version": 1,
+  "managedBy": "CDK",
+  "tags": {
+    "agentcore:created-by": "agentcore-cli",
+    "agentcore:project-name": "slaguardian"
+  },
+  "runtimes": [
+    {
+      "name": "slaguardian",
+      "build": "CodeZip",
+      "entrypoint": "main.py",
+      "codeLocation": "app/slaguardian/",
+      "runtimeVersion": "PYTHON_3_12",
+      "networkMode": "PUBLIC",
+      "protocol": "HTTP",
+      "instrumentation": {
+        "enableOtel": true
+      },
+      "envVars": [
+        {
+          "name": "BUCKET",
+          "value": "sla-guardian-incidents-463332366725-us-east-1"
+        },
+        {
+          "name": "BEDROCK_GUARDRAIL_ID",
+          "value": "sls107g72e26"
+        },
+        {
+          "name": "BEDROCK_GUARDRAIL_VERSION",
+          "value": "1"
+        }
+      ],
+      "additionalPolicies": [
+        "iam_policy.json"
+      ]
+    }
+  ],
+  "memories": [],
+  "knowledgeBases": [],
+  "credentials": [],
+  "evaluators": [],
+  "onlineEvalConfigs": [],
+  "agentCoreGateways": [],
+  "policyEngines": [],
+  "configBundles": [],
+  "abTests": [],
+  "harnesses": [],
+  "datasets": [],
+  "payments": []
+}
